@@ -1,213 +1,43 @@
 "# ExpressJS" 
-Node 
 ![image](https://github.com/user-attachments/assets/39c1084a-b49c-4292-840f-ed82061336b2)
-Social Media Web
+
+# Social Media Web
+
 A simple social media web application built with Node.js, Express, MySQL, and EJS. Users can register, log in, post updates, like posts, and comment on them.
-Table of Contents
 
-Features
-Prerequisites
-Installation
-Database Setup
-Running the Application
-Usage
-Troubleshooting
-Contributing
-License
+## Table of Contents
 
-Features
+- [Features](#features)
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [Database Setup](#database-setup)
+- [Running the Application](#running-the-application)
+- [Usage](#usage)
+- [Troubleshooting](#troubleshooting)
+- [Contributing](#contributing)
+- [License](#license)
 
-User registration and login.
-Create and view posts with images.
-Like and unlike posts.
-Comment on posts.
-Responsive design with Bootstrap.
+## Features
 
-Prerequisites
+- User registration and login.
+- Create and view posts with images.
+- Like and unlike posts.
+- Comment on posts.
+- Responsive design with Bootstrap.
+
+## Prerequisites
+
 Before you begin, ensure you have the following installed:
 
-Node.js (v14 or higher)
-MySQL (v8.0 or higher)
-Git (for cloning the repository)
-A code editor (e.g., VS Code)
+- Node.js (v14 or higher)
+- MySQL (v8.0 or higher)
+- Git (for cloning the repository)
+- A code editor (e.g., VS Code)
 
-Installation
+## Installation
 
-Clone the Repository:
+### Clone the Repository:
+
+```bash
 git clone https://github.com/yourusername/social-media-web.git
 cd social-media-web
-
-
-Install Dependencies:Install the required Node.js packages using npm:
-npm install
-
-This will install dependencies like express, mysql2, express-session, ejs, and others listed in package.json.
-If you don’t have a package.json file, create one by running:
-npm init -y
-
-Then install the required packages:
-npm install express mysql2 express-session ejs
-
-
-Install Bootstrap (Optional):The application uses Bootstrap for styling. The index.ejs file links to a CDN, but if you prefer a local copy, install Bootstrap:
-npm install bootstrap
-
-Ensure the app.js file serves the Bootstrap files:
-app.use('/bootstrap', express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
-
-
-
-Database Setup
-The application uses MySQL to store user data, posts, comments, and likes. Follow these steps to set up the database:
-
-Start MySQL:Ensure your MySQL server is running. On Windows, you can start it via the MySQL Workbench or command line:
-mysql -u root -p
-
-
-Create the Database:Log in to MySQL and create a database named social_media_web:
-CREATE DATABASE social_media_web;
-USE social_media_web;
-
-
-Import the Database Schema:
-
-Download or copy the social_media_web_sample_data.sql file from the repository.
-Import the SQL file to create tables and populate sample data:mysql -u root -p social_media_web < social_media_web_sample_data.sql
-
-
-Alternatively, in MySQL Workbench:
-Go to Server > Data Import.
-Select Import from Self-Contained File, choose social_media_web_sample_data.sql, and set the target schema to social_media_web.
-Click Start Import.
-
-
-
-
-Verify the Database:Check that the tables (users, posts, follows, comments, likes) are created and populated:
-SHOW TABLES;
-SELECT * FROM users;
-SELECT * FROM posts;
-
-
-Configure Database Connection:Ensure the app.js file has the correct MySQL connection details. Update the pool configuration if your MySQL user, password, or host differs:
-const pool = mysql.createPool({
-    host: '127.0.0.1',
-    user: 'root',
-    password: 'admin', // Replace with your MySQL password
-    database: 'social_media_web',
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
-});
-
-
-
-Running the Application
-
-Start the Server:Run the application using Node.js:
-node app.js
-
-You should see:
-Server is running on port 3000
-
-
-Access the Application:Open your browser and navigate to:
-http://localhost:3000
-
-If you’re not logged in, you’ll be redirected to the login page.
-
-
-Usage
-
-Register:
-
-Go to http://localhost:3000/register.
-Enter a username and password to create a new account.
-You’ll be redirected to the login page after successful registration.
-
-
-Log In:
-
-Go to http://localhost:3000/login.
-Use one of the sample accounts:
-Username: admin, Password: 123 (admin user)
-Username: Mai Linh, Password: password123 (regular user)
-
-
-Alternatively, use the account you created during registration.
-
-
-View and Interact with Posts:
-
-After logging in, you’ll see the homepage with a list of posts.
-Click the "Like" button to like a post. If you’ve already liked it, the button will change to "Unlike".
-Add a comment by typing in the comment box and clicking "Gửi" (Send).
-
-
-Navigation:
-
-Use the sidebar to navigate to Home, Profile, Friends, Groups, or Settings.
-Click "Logout" in the top-right corner to log out.
-
-
-
-Troubleshooting
-
-"Cannot connect to MySQL":
-
-Ensure MySQL is running and the credentials in app.js match your MySQL setup.
-Test your connection:mysql -u root -p
-
-
-Verify the database exists:SHOW DATABASES;
-USE social_media_web;
-SHOW TABLES;
-
-
-
-
-"Cannot find module 'express'":
-
-Ensure you ran npm install in the project directory.
-Check that node_modules folder exists and contains express.
-
-
-Images Not Loading:
-
-Verify the image_url in the posts table:SELECT image_url FROM posts;
-
-
-Test the URLs (e.g., https://picsum.photos/1280/600?random=1) directly in your browser.
-Ensure your internet connection is active (the app uses external image URLs).
-
-
-"Cannot GET /":
-
-Ensure you’re logged in. The root route (/) requires authentication.
-Check the browser console (F12 > Console) for errors and the server logs for more details.
-
-
-Layout Issues:
-
-If images or comments appear misaligned, verify the CSS in index.ejs (e.g., max-width: 800px for .post-image and .comment-section).
-Adjust the max-width if needed to fit your screen size.
-
-
-
-Contributing
-Contributions are welcome! To contribute:
-
-Fork the repository.
-Create a new branch:git checkout -b feature/your-feature-name
-
-
-Make your changes and commit them:git commit -m "Add your feature description"
-
-
-Push to your branch:git push origin feature/your-feature-name
-
-
-Create a pull request on GitHub.
-
-License
-This project is licensed under the MIT License. See the LICENSE file for details.
