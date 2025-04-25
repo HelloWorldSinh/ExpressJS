@@ -1,8 +1,5 @@
-"# ExpressJS" 
-![image](https://github.com/user-attachments/assets/39c1084a-b49c-4292-840f-ed82061336b2)
-
 # Social Media Web
-
+![image](https://github.com/user-attachments/assets/39c1084a-b49c-4292-840f-ed82061336b2)
 A simple social media web application built with Node.js, Express, MySQL, and EJS. Users can register, log in, post updates, like posts, and comment on them.
 
 ## Table of Contents
