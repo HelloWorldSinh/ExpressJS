@@ -1,0 +1,62 @@
+body {
+    background-color: #f1f2f5; /* Màu nền giống Facebook */
+    font-family: Arial, sans-serif;
+}
+
+.posts-container {
+    max-width: 600px; /* Chiều rộng giống Facebook */
+    margin: 0 auto; /* Căn giữa */
+}
+
+.post {
+    background-color: #fff; /* Nền trắng cho bài đăng */
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1); /* Đổ bóng nhẹ */
+}
+
+.post-header {
+    margin-bottom: 10px;
+}
+
+.avatar img {
+    width: 40px;
+    height: 40px;
+}
+
+.post-meta strong {
+    font-size: 14px;
+    color: #333;
+}
+
+.post-meta small {
+    font-size: 12px;
+    color: #65676b; /* Màu xám giống Facebook */
+}
+
+.post-content p {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 0;
+}
+
+.post-image img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+.post-interactions {
+    font-size: 14px;
+    color: #65676b;
+}
+
+.post-actions button {
+    font-size: 14px;
+    color: #65676b;
+    text-decoration: none;
+}
+
+.post-actions button:hover {
+    background-color: #f2f2f2;
+    border-radius: 5px;
+}

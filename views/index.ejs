@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Web</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f0f2f5;
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        }
+        .navbar {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .navbar-brand img {
+            height: 40px;
+        }
+        .sidebar {
+            position: fixed;
+            top: 60px;
+            left: 0;
+            width: 250px;
+            height: calc(100vh - 60px);
+            background-color: #fff;
+            padding: 20px;
+            overflow-y: auto;
+            box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1);
+        }
+        .sidebar a {
+            display: block;
+            padding: 10px;
+            color: #1c1e21;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 5px;
+        }
+        .sidebar a:hover {
+            background-color: #e4e6eb;
+        }
+        .main-content {
+            margin-left: 270px;
+            margin-top: 80px;
+            padding: 20px;
+        }
+        .post {
+            background-color: #fff;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        .post-header img.avatar {
+            width: 40px;
+            height: 40px;
+            object-fit: cover;
+        }
+        .post-meta strong {
+            color: #1c1e21;
+            font-size: 14px;
+        }
+        .post-meta small {
+            font-size: 12px;
+            color: #65676b;
+        }
+        .post-content p {
+            font-size: 14px;
+            color: #1c1e21;
+            margin: 10px 0;
+        }
+        .post-image img {
+            border-radius: 8px;
+            max-width: 100%;
+        }
+        .post-actions button {
+            font-size: 14px;
+            color: #65676b;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            border-radius: 6px;
+            padding: 8px 16px;
+        }
+        .post-actions button:hover {
+            background-color: #e4e6eb;
+        }
+        .post-interactions span {
+            font-size: 13px;
+            color: #65676b;
+        }
+        .dropdown-menu {
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        .comment-section {
+            margin-top: 10px;
+        }
+        .comment-input {
+            display: flex;
+            align-items: center;
+        }
+        .comment-input input {
+            flex: 1;
+            border-radius: 20px;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            margin-right: 10px;
+        }
+        .comment-input button {
+            border-radius: 20px;
+        }
+        .comment {
+            display: flex;
+            margin-top: 10px;
+        }
+        .comment img.avatar {
+            width: 32px;
+            height: 32px;
+        }
+        .comment-body {
+            background-color: #f0f2f5;
+            border-radius: 15px;
+            padding: 8px 12px;
+            margin-left: 10px;
+            flex: 1;
+        }
+        .comment-body strong {
+            font-size: 13px;
+        }
+        .comment-body p {
+            font-size: 13px;
+            margin: 0;
+        }
+        .comment-body small {
+            font-size: 11px;
+            color: #65676b;
+        }
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+            .main-content {
+                margin-left: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">
+                <img src="https://cdn.pixabay.com/photo/2017/06/22/14/23/twitter-2430933_640.png" alt="Logo" class="logo">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/"><i class="bi bi-house-fill"></i> Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile"><i class="bi bi-person-fill"></i> Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="/logout" method="POST">
+                            <button type="submit" class="nav-link btn btn-link"><i class="bi bi-box-arrow-right"></i> Logout</button>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <a href="/"><i class="bi bi-house-door me-2"></i> Home</a>
+        <a href="/profile"><i class="bi bi-person me-2"></i> Profile</a>
+        <a href="/friends"><i class="bi bi-people me-2"></i> Friends</a>
+        <a href="/groups"><i class="bi bi-collection me-2"></i> Groups</a>
+        <a href="/settings"><i class="bi bi-gear me-2"></i> Settings</a>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h1 class="mb-4">Latest Posts</h1>
+            <% if (posts.length > 0) { %>
+                <div class="posts-container">
+                    <% posts.forEach(post => { %>
+                        <div class="post">
+                            <!-- Post Header -->
+                            <div class="post-header d-flex align-items-center justify-content-between">
+                                <div class="d-flex align-items-center">
+                                    <!-- Avatar -->
+                                    <div class="avatar me-2">
+                                        <img src="<%= post.avatar_url || 'https://via.placeholder.com/40' %>" alt="Avatar" class="rounded-circle avatar">
+                                    </div>
+                                    <!-- Username and Time -->
+                                    <div class="post-meta">
+                                        <strong><%= post.username %></strong>
+                                        <small class="text-muted d-block">
+                                            <%= new Date(post.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %> · 
+                                            <%= new Date(post.created_at).toLocaleDateString() %>
+                                        </small>
+                                    </div>
+                                </div>
+                                <!-- Options Menu -->
+                                <div class="dropdown">
+                                    <button class="btn btn-link text-muted" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots"></i>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Edit</a></li>
+                                        <li><a class="dropdown-item" href="#">Delete</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Post Content -->
+                            <div class="post-content mt-2">
+                                <p><%= post.body %></p>
+                            </div>
+
+                            <!-- Post Image (if available) -->
+                            <% if (post.image_url) { %>
+                                <div class="post-image mt-2">
+                                    <img src="<%= post.image_url %>" alt="Post Image" class="img-fluid">
+                                </div>
+                            <% } %>
+
+                            <!-- Interactions -->
+                            <div class="post-interactions mt-2 d-flex justify-content-between align-items-center">
+                                <div class="interactions-left">
+                                    <% if (post.likes) { %>
+                                        <span class="me-2">
+                                            <img src="https://scontent.fsgn2-5.fna.fbcdn.net/m1/v/t6/An-HX414PnqCVzyEq9OFFdayyrdj8c3jnyPbPcierija6hpzsUvw-1VPQ260B2M9EbxgmP7pYlNQSjYAXF782_vnvvpDLxvJQD74bwdWEJ0DhcErkDga6gazZZUYm_Q.png?_nc_gid=YiynMe0_q-YkEyay3GaMdw&_nc_eui2=AeGzj2QSKcH6ZnHtOEvJx1_qDoczsRRn4rsOhzOxFGfiuyDB7mbFCY6WdeNQqOHKJGXbNjoVQKuSs-2uLEdpyzI1&_nc_oc=Adl8bB2ybnjQfsZzEvGVyx8VFP8icKsmVEQMx1fyS92No-v4Yd6rYiLY5oFpHyjcJvo5MX46YVsflLYRXcvVRhcD&ccb=10-5&oh=00_AfHxYcfz8Qo3DNrOtQ1N36XkD7_UrIkbhofPpg-hEF0ISQ&oe=683328A3&_nc_sid=7da55a" alt="Like" width="16">
+                                            <span class="like-count" data-post-id="<%= post.id %>"><%= post.likes %></span>
+                                        </span>
+                                    <% } %>
+                                    <% if (post.comments) { %>
+                                        <span class="text-muted">
+                                            <span class="comment-count" data-post-id="<%= post.id %>"><%= post.comments %></span> comments
+                                        </span>
+                                    <% } %>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <hr class="my-2">
+                            <div class="post-actions d-flex justify-content-around">
+                    
+                            </div>
+
+                            <!-- Comment Section -->
+                            <div class="comment-section">
+                                <!-- Existing Comments -->
+                                <% if (post.comments_data && post.comments_data.length > 0) { %>
+                                    <% post.comments_data.forEach(comment => { %>
+                                        <div class="comment">
+                                            <img src="<%= comment.avatar_url || 'https://via.placeholder.com/32' %>" alt="Avatar" class="rounded-circle avatar">
+                                            <div class="comment-body">
+                                                <strong><%= comment.username %></strong>
+                                                <p><%= comment.content %></p>
+                                                <small><%= new Date(comment.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) %> · <%= new Date(comment.created_at).toLocaleDateString() %></small>
+                                            </div>
+                                        </div>
+                                    <% }) %>
+                                <% } %>
+                                <!-- Comment Input -->
+                                <div class="comment-input mt-2">
+                                    <input type="text" class="form-control comment-input-field" data-post-id="<%= post.id %>" placeholder="Viết bình luận...">
+                                    <button class="btn btn-primary btn-sm submit-comment" data-post-id="<%= post.id %>">Gửi</button>
+                                </div>
+                            </div>
+                        </div>
+                    <% }) %>
+                </div>
+            <% } else { %>
+                <p>No posts available.</p>
+            <% } %>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JavaScript for Like/Comment Interactions -->
+    <script>
+        // Like button handler
+        document.querySelectorAll('.like-btn').forEach(button => {
+            button.addEventListener('click', async () => {
+                const postId = button.getAttribute('data-post-id');
+                try {
+                    const response = await fetch(`/like/${postId}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        const likeCount = document.querySelector(`.like-count[data-post-id="${postId}"]`);
+                        likeCount.textContent = parseInt(likeCount.textContent) + 1;
+                    }
+                } catch (error) {
+                    console.error('Error liking post:', error);
+                }
+            });
+        });
+
+        // Comment submission handler
+        document.querySelectorAll('.submit-comment').forEach(button => {
+            button.addEventListener('click', async () => {
+                const postId = button.getAttribute('data-post-id');
+                const input = document.querySelector(`.comment-input-field[data-post-id="${postId}"]`);
+                const content = input.value.trim();
+                if (!content) return;
+                try {
+                    const response = await fetch(`/comment/${postId}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ content })
+                    });
+                    const data = await response.json();
+                    if (data.success) {
+                        // Update comment count
+                        const commentCount = document.querySelector(`.comment-count[data-post-id="${postId}"]`);
+                        commentCount.textContent = parseInt(commentCount.textContent) + 1;
+                        // Reload page to show new comment
+                        location.reload();
+                    } else {
+                        alert('Không thể gửi bình luận. Vui lòng thử lại.');
+                    }
+                } catch (error) {
+                    console.error('Error commenting on post:', error);
+                    alert('Lỗi hệ thống. Vui lòng thử lại sau.');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
