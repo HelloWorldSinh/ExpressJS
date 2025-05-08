@@ -163,8 +163,14 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
+            
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
+                    <li>
+                        <form action="/search-friends" method="GET" class="mb-3">
+                            <input type="text" name="query" class="form-control" placeholder="Tìm bạn bè...">
+                        </form>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/"><i class="bi bi-house-fill"></i> Home</a>
                     </li>
@@ -189,7 +195,7 @@
         <a href="/groups"><i class="bi bi-collection me-2"></i> Groups</a>
         <a href="/settings"><i class="bi bi-gear me-2"></i> Settings</a>
     </div>
-
+    
     <!-- Main Content -->
     <div class="main-content">
         <div class="container">

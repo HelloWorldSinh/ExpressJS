@@ -24,7 +24,7 @@ app.set('views', path.join(__dirname, 'views'));
 const pool = mysql.createPool({
     host: '127.0.0.1',
     user: 'root',
-    password: 'admin',
+    password: '1234',
     database: 'social_media_web',
     waitForConnections: true,
     connectionLimit: 10,
@@ -140,6 +140,23 @@ app.post('/comment/:postId', isAuthenticated, async (req, res) => {
         res.status(500).json({ success: false, error: 'Server Error' });
     }
 });
+app.get('/search-friends', isAuthenticated, async (req, res) => {
+    const query = req.query.query || '';
+    try {
+        const [users] = await pool.query(`
+            SELECT id, username, avatar_url 
+            FROM users 
+            WHERE username LIKE ?
+        `, [`%${query}%`]);
+
+        res.render('search-friends', { users, query });
+    } catch (err) {
+        console.error('Error searching users:', err);
+        res.status(500).send('Lỗi tìm kiếm.');
+    }
+});
+
+
 
 // Start server
 const PORT = process.env.PORT || 3000;
